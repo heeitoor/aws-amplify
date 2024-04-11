@@ -27,4 +27,6 @@ export class AppComponent {
     }
     return subdomain;
   };
+
+  a = 12;
 }
