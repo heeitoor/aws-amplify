@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { RouterModule } from "@angular/router";
+import { PreloadAllModules, RouterModule } from "@angular/router";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
@@ -10,18 +10,25 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot([
+    RouterModule.forRoot(
+      [
+        {
+          path: "people",
+          loadChildren: () =>
+            import("./modules/people/people.module").then(
+              (m) => m.PeopleModule
+            ),
+        },
+        {
+          path: "cart",
+          loadChildren: () =>
+            import("./modules/cart/cart.module").then((m) => m.CartModule),
+        },
+      ],
       {
-        path: "people",
-        loadChildren: () =>
-          import("./modules/people/people.module").then((m) => m.PeopleModule),
-      },
-      {
-        path: "cart",
-        loadChildren: () =>
-          import("./modules/cart/cart.module").then((m) => m.CartModule),
-      },
-    ]),
+        preloadingStrategy: PreloadAllModules,
+      }
+    ),
     BrowserAnimationsModule,
   ],
   providers: [],
