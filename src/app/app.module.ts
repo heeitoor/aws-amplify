@@ -24,10 +24,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
           loadChildren: () =>
             import("./modules/cart/cart.module").then((m) => m.CartModule),
         },
-      ],
-      {
-        preloadingStrategy: PreloadAllModules,
-      }
+      ]
+      // {
+      //   preloadingStrategy: PreloadAllModules,
+      // }
     ),
     BrowserAnimationsModule,
   ],
